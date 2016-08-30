@@ -1,20 +1,22 @@
 {%set name = "hachoir-core" %}
 {%set version = "1.3.3" %}
+{%set compress_type = "tar.gz" %}
 {%set hash_type = "sha256" %}
 {%set hash_val = "ecf5d16eccc76b22071d6062e54edb67595f70d827644d3a6dff04289b4058df" %}
 
 package:
-  name: {{ name }}
+  name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  fn: {{ name }}-{{ version }}.{{ compress_type }}
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ compress_type }}
   {{ hash_type }}: {{ hash_val }}
+
 
 build:
   skip: True  # [py3k]
-  number: 0
+  number: 1
   script: python setup.py install
 
 requirements:
@@ -33,6 +35,7 @@ test:
 about:
   home: http://bitbucket.org/haypo/hachoir/wiki/hachoir-core
   license: GPL 2.0
+  license_file: COPYING
   summary: 'Core of Hachoir framework: parse and edit binary files'
 
 extra:
